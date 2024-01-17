@@ -370,6 +370,7 @@ where
                     IsoYear => (4, true, Parsed::set_isoyear),
                     IsoYearDiv100 => (2, false, Parsed::set_isoyear_div_100),
                     IsoYearMod100 => (2, false, Parsed::set_isoyear_mod_100),
+                    Quarter => (1, false, Parsed::set_quarter),
                     Month => (2, false, Parsed::set_month),
                     Day => (2, false, Parsed::set_day),
                     WeekFromSun => (2, false, Parsed::set_week_from_sun),
@@ -862,6 +863,12 @@ mod tests {
             "1 2 3 45",
             &[num(Month), S, num(Day), S, num(WeekFromSun), S, num(NumDaysFromSun), num(IsoWeek)],
             parsed!(month: 1, day: 2, week_from_sun: 3, weekday: Weekday::Thu, isoweek: 5),
+        );
+
+        check(
+            "2010 Q1",
+            &[num(Year), S, Literal("Q"), num(Quarter)],
+            parsed!(year: 2010, month: 1),
         );
         check(
             "6 7 89 01",

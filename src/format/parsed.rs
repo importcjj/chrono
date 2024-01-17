@@ -184,6 +184,13 @@ impl Parsed {
         set_if_consistent(&mut self.month, u32::try_from(value).map_err(|_| OUT_OF_RANGE)?)
     }
 
+    /// Tries to set the [`month`](#structfield.month) field to first month in quarter from given value.
+    #[inline]
+    pub fn set_quarter(&mut self, value: i64) -> ParseResult<()> {
+        let month = (value - 1) * 3 + 1;
+        set_if_consistent(&mut self.month, u32::try_from(month).map_err(|_| OUT_OF_RANGE)?)
+    }
+
     /// Tries to set the [`week_from_sun`](#structfield.week_from_sun) field from given value.
     #[inline]
     pub fn set_week_from_sun(&mut self, value: i64) -> ParseResult<()> {

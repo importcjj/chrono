@@ -261,6 +261,14 @@ pub trait Datelike: Sized {
         ndays += ((year * 1461) >> 2) - div_100 + (div_100 >> 2);
         ndays + self.ordinal() as i32
     }
+
+    /// returns the quarter of year.
+    ///
+    /// The return value ranges from 1 to 4.
+    #[inline]
+    fn quarter(&self) -> u32 {
+        (self.month() - 1) / 3 + 1
+    }
 }
 
 /// The common set of methods for time component.

@@ -217,6 +217,7 @@ fn format_inner(
                 IsoYear => (4, date.map(|d| i64::from(d.iso_week().year()))),
                 IsoYearDiv100 => (2, date.map(|d| i64::from(d.iso_week().year()).div_euclid(100))),
                 IsoYearMod100 => (2, date.map(|d| i64::from(d.iso_week().year()).rem_euclid(100))),
+                Quarter => (1, date.map(|d| i64::from(d.quarter()))),
                 Month => (2, date.map(|d| i64::from(d.month()))),
                 Day => (2, date.map(|d| i64::from(d.day()))),
                 WeekFromSun => (2, date.map(|d| i64::from(week_from_sun(d)))),
@@ -734,6 +735,7 @@ mod tests {
         assert_eq!(dt.format("%c").to_string(), "Wed Sep  8 07:06:54 2010");
         assert_eq!(dt.format("%s").to_string(), "1283929614");
         assert_eq!(dt.format("%t%n%%%n%t").to_string(), "\t\n%\n\t");
+        assert_eq!(dt.format("%Y Q%Q").to_string(), "2010 Q3");
 
         // a horror of leap second: coming near to you.
         let dt = NaiveDate::from_ymd_opt(2012, 6, 30)
@@ -742,6 +744,7 @@ mod tests {
             .unwrap();
         assert_eq!(dt.format("%c").to_string(), "Sat Jun 30 23:59:60 2012");
         assert_eq!(dt.format("%s").to_string(), "1341100799"); // not 1341100800, it's intentional.
+        assert_eq!(dt.format("Q%Q").to_string(), "Q2");
     }
 
     #[test]

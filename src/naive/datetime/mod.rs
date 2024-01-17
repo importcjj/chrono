@@ -1058,6 +1058,7 @@ impl Datelike for NaiveDateTime {
     ///
     /// let dt: NaiveDateTime = NaiveDate::from_ymd_opt(2015, 9, 25).unwrap().and_hms_opt(12, 34, 56).unwrap();
     /// assert_eq!(dt.month(), 9);
+    /// assert_eq!(dt.quarter(), 3);
     /// ```
     #[inline]
     fn month(&self) -> u32 {

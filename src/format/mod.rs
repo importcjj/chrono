@@ -144,6 +144,9 @@ pub enum Numeric {
     /// For formatting, it assumes UTC upon the absence of time zone offset.
     Timestamp,
 
+    /// Quarter of year. Sets month to first month in quarter.
+    Quarter,
+
     /// Internal uses only.
     ///
     /// This item exists so that one can add additional internal-only formatting

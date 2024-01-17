@@ -15,6 +15,7 @@ The following specifiers are available both to formatting and parsing.
 | `%C`  | `20`     | The proleptic Gregorian year divided by 100, zero-padded to 2 digits. [^1] |
 | `%y`  | `01`     | The proleptic Gregorian year modulo 100, zero-padded to 2 digits. [^1]     |
 |       |          |                                                                            |
+| `%Q`  | `1`      | Quarter of year. Sets month to first month in quarter.                     |
 | `%m`  | `07`     | Month number (01--12), zero-padded to 2 digits.                            |
 | `%b`  | `Jul`    | Abbreviated month name. Always 3 letters.                                  |
 | `%B`  | `July`   | Full month name. Also accepts corresponding abbreviation in parsing.       |
@@ -316,6 +317,7 @@ impl<'a> StrftimeItems<'a> {
                     }
                     'F' => queue![num0(Year), Literal("-"), num0(Month), Literal("-"), num0(Day)],
                     'G' => num0(IsoYear),
+                    'Q' => num0(Quarter),
                     'H' => num0(Hour),
                     'I' => num0(Hour12),
                     'M' => num0(Minute),
